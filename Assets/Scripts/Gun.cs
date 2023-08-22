@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform muzzle;
     [SerializeField] GameObject impactEffect;
     [SerializeField] Animator muzzleFlashAnimator;
+    [SerializeField] PlayerAmmo pAmmo;
 
     [Header("Crosshair")]
     [SerializeField] Reticle crosshair;
@@ -67,18 +68,23 @@ public class Gun : MonoBehaviour
             if (muzzleFlashAnimator)
                 muzzleFlashAnimator.SetTrigger("isFiring");
 
-            RaycastHit hitInfo;
-            if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, range))
+            if (pAmmo.HasAmmo())
             {
-                Destructable destructable = hitInfo.transform.GetComponent<Destructable>();
-                if (destructable != null)
+                RaycastHit hitInfo;
+                if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, range))
                 {
-                    destructable.Damage(damage);
-                    Debug.Log("Hit: " + hitInfo.transform.name);
+                    Destructable destructable = hitInfo.transform.GetComponent<Destructable>();
+                    if (destructable != null)
+                    {
+                        destructable.Damage(damage);
+                        Debug.Log("Hit: " + hitInfo.transform.name);
+                    }
+
+                    if (impactEffect)
+                        Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                 }
 
-                if (impactEffect)
-                    Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                pAmmo.UseAmmo();
             }
         }
     }
