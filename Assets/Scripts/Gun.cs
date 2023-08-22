@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,12 +8,24 @@ public class Gun : MonoBehaviour
     [SerializeField] float range = 100f;
     [SerializeField] InputActionReference shootAction;
     [SerializeField] Transform muzzle;
+    [SerializeField] Transform secondaryGrip;
     [SerializeField] GameObject impactEffect;
     [SerializeField] Animator muzzleFlashAnimator;
+    [SerializeField] AudioClip shotSound;
+    [SerializeField] Animator gunAnimator;
 
     [Header("Crosshair")]
     [SerializeField] Reticle crosshair;
     [SerializeField] float crosshairRange = 10f;
+
+    AudioSource audioSource;
+
+    bool useSecondayGrip = false;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -26,21 +39,14 @@ public class Gun : MonoBehaviour
         shootAction.action.performed -= Shoot;
     }
 
-    void OnEnable()
-    {
-        if (crosshair)
-            crosshair.gameObject.SetActive(true);
-    }
-
-    void OnDisable()
-    {
-        if (crosshair)
-            crosshair.gameObject.SetActive(false);
-    }
-
     // Update is called once per frame
     void Update()
     {
+        if (useSecondayGrip)
+        {
+            transform.LookAt(secondaryGrip.position);
+        }
+
         if (!crosshair)
             return;
 
@@ -62,10 +68,14 @@ public class Gun : MonoBehaviour
     {
         if (isActiveAndEnabled)
         {
+            if (audioSource)
+                audioSource.PlayOneShot(shotSound);
             if (crosshair)
                 crosshair.Trigger();
             if (muzzleFlashAnimator)
                 muzzleFlashAnimator.SetTrigger("isFiring");
+            if (gunAnimator)
+                gunAnimator.SetTrigger("Shoot");
 
             RaycastHit hitInfo;
             if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, range))
@@ -81,5 +91,16 @@ public class Gun : MonoBehaviour
                     Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
         }
+    }
+
+    public void StartSecondaryGrip(Transform gripTransform)
+    {
+        secondaryGrip = gripTransform;
+        useSecondayGrip = true;
+    }
+
+    public void EndSecondaryGrip()
+    {
+        useSecondayGrip = false;
     }
 }
