@@ -38,13 +38,13 @@ public class PlayerAmmo : MonoBehaviour
             if (ammo != null)
             {
                 selectedObject = hitInfo.transform;
-                ammo.GetComponent<Renderer>().material.color = Color.green;
                 ammo.selected = true;
                 ammoSelected = true;
             }
             else if (ammoSelected)
             {
-                selectedObject.GetComponent<Ammo>().selected = false;  
+                selectedObject.GetComponent<Ammo>().selected = false;
+                ammoSelected = false;
             }
         }
     }
