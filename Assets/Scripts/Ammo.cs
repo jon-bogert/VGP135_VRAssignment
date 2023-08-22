@@ -12,6 +12,7 @@ public class Ammo : MonoBehaviour
     public PlayerAmmo pAmmo;
     Transform grabLocation;
 
+    public bool selected;
     bool pickingUp = false;
     float pickUpTime = 0f;
 
@@ -22,6 +23,15 @@ public class Ammo : MonoBehaviour
 
     void Update()
     {
+        if (selected)
+        {
+            GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            GetComponent<Renderer>().material.color = Color.red;
+        }
+        
         if (pickingUp)
         {
             pickUpTime += Time.deltaTime;

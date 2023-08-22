@@ -8,7 +8,12 @@ public class PlayerAmmo : MonoBehaviour
     [SerializeField] int ammoAmount = 20;
     [SerializeField] float range = 0.5f;
 
+    [SerializeField] Transform grabLocation;
     [SerializeField] InputActionReference pickupAction;
+
+    Transform selectedObject;
+
+    private bool ammoSelected;
 
     void Start()
     {
@@ -25,13 +30,29 @@ public class PlayerAmmo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit hitInfo;
+        if (Physics.Raycast(grabLocation.position, grabLocation.forward, out hitInfo, range))
+        {
+            selectedObject = hitInfo.transform;
+            Ammo ammo = selectedObject.GetComponent<Ammo>();
 
+            if (ammo != null)
+            {
+                ammo.GetComponent<Renderer>().material.color = Color.green;
+                ammo.selected = true;
+                ammoSelected = true;
+            }
+            else if (ammoSelected)
+            {
+                selectedObject.GetComponent<Ammo>().selected = false;  
+            }
+        }
     }
 
     void PickUp(InputAction.CallbackContext ctx)
     {
         RaycastHit hitInfo;
-        if (Physics.Raycast(transform.position, -transform.up, out hitInfo, range))
+        if (Physics.Raycast(grabLocation.position, grabLocation.forward, out hitInfo, range))
         {
             Ammo ammo = hitInfo.transform.GetComponent<Ammo>();
 
