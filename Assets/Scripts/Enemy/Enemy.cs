@@ -8,9 +8,14 @@ public class Enemy : MonoBehaviour
     private float speed;
     [SerializeField]
     private Grid grid;
-    [SerializeField]
-    private Vector2 pos;
     public Health health;
+
+    [SerializeField]
+    private Vector3 pos;
+    [SerializeField]
+    private Vector3 gridPos;
+    public bool temp;
+    public Vector3 cellSize;
 
     private void Awake()
     {
@@ -19,16 +24,47 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        transform.position = grid.LocalToWorld(pos);
+        cellSize = grid.cellSize;
+        gridPos = pos;
     }
 
     private void Update()
     {
-
+        transform.position = grid.LocalToWorld(pos);
+        if (CheckColisions(gridPos))
+        {
+            Debug.Log("Access");
+        }
     }
 
     private void Pathfinding()
     {
+        
+    }
 
+    private bool CheckColisions(Vector3 pos)
+    {
+        Vector3 cellCenter = pos + cellSize * 0.5f;
+        cellSize.y = 0.0f;
+        Collider[] collider = Physics.OverlapBox(cellCenter, cellSize * 0.5f);
+
+        foreach (var coll in collider)
+        {
+            if (coll.tag == "Player")
+            {
+                temp = true;
+                return true;
+            }
+        }
+        temp = false;
+        return false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 cellCeter = gridPos + cellSize * 0.5f;
+        cellSize.y = 0.0f;
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(cellCeter, cellSize);
     }
 }
