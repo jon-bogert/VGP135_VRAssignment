@@ -616,6 +616,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1905889491}
   - {fileID: 409651610}
   m_Father: {fileID: 1891824985}
   m_RootOrder: 1
@@ -1893,7 +1894,7 @@ PrefabInstance:
     - target: {fileID: 8118175132079646300, guid: 3cf3dc028b22b944a98501057b759c33,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8118175132079646300, guid: 3cf3dc028b22b944a98501057b759c33,
         type: 3}
@@ -2138,7 +2139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0a0b9f16f891c4e8ab5645a2ed98ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammo: 20
   damage: 10
   range: 100
   shootAction: {fileID: 6051831963141098706, guid: a5619b4b184cf5347885b905b05853be,
@@ -2147,6 +2147,7 @@ MonoBehaviour:
   impactEffect: {fileID: 6240914339105042815, guid: 90fd2846b659dca498fb3af23ef8a63a,
     type: 3}
   muzzleFlashAnimator: {fileID: 0}
+  pAmmo: {fileID: 0}
   crosshair: {fileID: 1887826029}
   crosshairRange: 10
 --- !u!4 &1391098942
@@ -2393,27 +2394,14 @@ GameObject:
   - component: {fileID: 1773582520}
   - component: {fileID: 1773582519}
   - component: {fileID: 1773582518}
-  - component: {fileID: 1773582517}
+  - component: {fileID: 1773582522}
   m_Layer: 0
-  m_Name: Cube (9)
+  m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1773582517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773582516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7798f455a64bb843a220f9a3cc0442f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 30
 --- !u!65 &1773582518
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2492,6 +2480,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1773582522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773582516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b4a8e604fdc49429fc70b3180f7d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoAmount: 10
+  grabTime: 0.4
+  pAmmo: {fileID: 0}
 --- !u!1 &1835019495
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,8 +2807,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1905889491}
+  - component: {fileID: 1905889492}
   m_Layer: 0
-  m_Name: Pickup
+  m_Name: PlayerAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2818,14 +2822,30 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905889490}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_Father: {fileID: 745570177}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1905889492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905889490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8ecdccb7c90cb40bbcba184072f6a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoAmount: 20
+  range: 0.5
+  pickupAction: {fileID: 8964054365482218901, guid: a5619b4b184cf5347885b905b05853be,
+    type: 3}
 --- !u!1 &1944590195
 GameObject:
   m_ObjectHideFlags: 0
