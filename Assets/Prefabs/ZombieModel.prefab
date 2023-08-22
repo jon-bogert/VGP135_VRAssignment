@@ -1123,6 +1123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  grid: {fileID: 0}
+  pos: {x: 0, y: 0, z: 0}
 --- !u!1 &4226999399806917069
 GameObject:
   m_ObjectHideFlags: 0
