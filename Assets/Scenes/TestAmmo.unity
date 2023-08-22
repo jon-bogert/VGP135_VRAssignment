@@ -2178,7 +2178,7 @@ MonoBehaviour:
   impactEffect: {fileID: 6240914339105042815, guid: 90fd2846b659dca498fb3af23ef8a63a,
     type: 3}
   muzzleFlashAnimator: {fileID: 0}
-  pAmmo: {fileID: 0}
+  pAmmo: {fileID: 1905889492}
   crosshair: {fileID: 1887826029}
   crosshairRange: 10
 --- !u!4 &1391098942
@@ -2526,6 +2526,7 @@ MonoBehaviour:
   ammoAmount: 10
   grabTime: 0.4
   pAmmo: {fileID: 0}
+  selected: 0
 --- !u!1 &1835019495
 GameObject:
   m_ObjectHideFlags: 0
