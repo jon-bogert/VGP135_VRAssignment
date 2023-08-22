@@ -33,11 +33,11 @@ public class PlayerAmmo : MonoBehaviour
         RaycastHit hitInfo;
         if (Physics.Raycast(grabLocation.position, grabLocation.forward, out hitInfo, range))
         {
-            selectedObject = hitInfo.transform;
-            Ammo ammo = selectedObject.GetComponent<Ammo>();
+            Ammo ammo = hitInfo.transform.GetComponent<Ammo>();
 
             if (ammo != null)
             {
+                selectedObject = hitInfo.transform;
                 ammo.GetComponent<Renderer>().material.color = Color.green;
                 ammo.selected = true;
                 ammoSelected = true;

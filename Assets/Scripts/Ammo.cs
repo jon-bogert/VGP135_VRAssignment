@@ -38,7 +38,7 @@ public class Ammo : MonoBehaviour
             float percentageComplete = pickUpTime / grabTime;
             transform.position = Vector3.Lerp(transform.position, grabLocation.position, percentageComplete);
 
-            if (percentageComplete == 1.0f)
+            if (Mathf.Approximately(percentageComplete, 1.0f))
             {
                 pickingUp = false;
                 EndPickUp();
