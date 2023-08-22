@@ -10,6 +10,13 @@ public class PathFinding
     private Vector3 cellSize;
 
     private List<Node> openList;
+    private NodeGrid grid;
+
+    public PathFinding() { }
+    public PathFinding(int width, int height) 
+    { 
+        grid = new NodeGrid(width, height); 
+    }
 
     private void Pathfinding(Vector3 start, Vector3 end)
     {
