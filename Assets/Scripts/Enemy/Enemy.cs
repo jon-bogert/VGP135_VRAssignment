@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    private float speed;
     public Health health;
 
     private void Awake()
