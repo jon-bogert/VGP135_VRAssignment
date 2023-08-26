@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerAmmo : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerAmmo : MonoBehaviour
 
     [SerializeField] Transform grabLocation;
     [SerializeField] InputActionReference pickupAction;
+    [SerializeField] TextMeshProUGUI text;
 
     Transform selectedObject;
 
@@ -19,6 +21,7 @@ public class PlayerAmmo : MonoBehaviour
     {
         //Subscribe to Input
         pickupAction.action.performed += PickUp;
+        text.text = ammoAmount.ToString();
     }
 
     void OnDestroy()
@@ -72,10 +75,12 @@ public class PlayerAmmo : MonoBehaviour
     public void UseAmmo()
     {
         ammoAmount--;
+        text.text = ammoAmount.ToString();
     }
 
     public void AddAmmo(int amount)
     {
         ammoAmount += amount;
+        text.text = ammoAmount.ToString();
     }
 }
