@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GripZone : MonoBehaviour
 {
+    [SerializeField] bool doLogging = true;
     Gun thisGun;
 
     private void Awake()
@@ -14,6 +15,7 @@ public class GripZone : MonoBehaviour
         SecondaryGrip grip = other.GetComponent<SecondaryGrip>();
         if (grip != null)
         {
+            if (doLogging) Debug.Log("SecondaryGrip Enter");
             grip.currentGun = thisGun;
         }
     }
@@ -22,6 +24,7 @@ public class GripZone : MonoBehaviour
         SecondaryGrip grip = other.GetComponent<SecondaryGrip>();
         if (grip != null)
         {
+            if (doLogging) Debug.Log("SecondaryGrip Exit");
             grip.currentGun = null;
         }
     }

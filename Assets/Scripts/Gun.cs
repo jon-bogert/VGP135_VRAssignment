@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     [SerializeField] InputActionReference shootAction;
     [SerializeField] Transform muzzle;
     [SerializeField] Transform secondaryGrip;
+    [SerializeField] Transform primaryHand;
     [SerializeField] GameObject impactEffect;
     [SerializeField] Animator muzzleFlashAnimator;
     [SerializeField] AudioClip shotSound;
@@ -21,10 +22,14 @@ public class Gun : MonoBehaviour
     AudioSource audioSource;
 
     bool useSecondayGrip = false;
+    Vector3 _localPosition = Vector3.zero;
+    Quaternion _localRotation = Quaternion.identity;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        _localPosition = transform.localPosition;
+        _localRotation = transform.localRotation;
     }
 
     void Start()
@@ -45,6 +50,7 @@ public class Gun : MonoBehaviour
         if (useSecondayGrip)
         {
             transform.LookAt(secondaryGrip.position);
+            //TODO - Rotate to match primary hand
         }
 
         if (!crosshair)
@@ -102,5 +108,7 @@ public class Gun : MonoBehaviour
     public void EndSecondaryGrip()
     {
         useSecondayGrip = false;
+        transform.localPosition = _localPosition;
+        transform.localRotation = _localRotation;
     }
 }

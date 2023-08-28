@@ -20,13 +20,17 @@ public class SecondaryGrip : MonoBehaviour
 
     void OnGrip(InputAction.CallbackContext ctx)
     {
-        if (ctx.ReadValue<float>() > 0.5f)
+        if (currentGun && ctx.ReadValue<float>() > 0.5f)
         {
-            
+            currentGun.StartSecondaryGrip(transform);
         }
-        else
+        else if (currentGun)
         {
-            //Let Go
+            currentGun.EndSecondaryGrip();
+        }
+        else if (!currentGun && ctx.ReadValue<float>() <= 0.5f)
+        {
+            Debug.LogWarning("SecondaryGrip -> Current Gun was Null on let-go");
         }
     }
 }
