@@ -8,6 +8,8 @@ public class SecondaryGrip : MonoBehaviour
     [HideInInspector]
     public Gun currentGun = null;
 
+    public bool isGrippingGun { get { return (currentGun && currentGun.usingSecondaryGrip); } }
+
     private void Awake()
     {
         gripInput.action.performed += OnGrip;
@@ -27,10 +29,6 @@ public class SecondaryGrip : MonoBehaviour
         else if (currentGun)
         {
             currentGun.EndSecondaryGrip();
-        }
-        else if (!currentGun && ctx.ReadValue<float>() <= 0.5f)
-        {
-            Debug.LogWarning("SecondaryGrip -> Current Gun was Null on let-go");
         }
     }
 }

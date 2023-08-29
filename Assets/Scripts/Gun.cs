@@ -21,9 +21,11 @@ public class Gun : MonoBehaviour
 
     AudioSource audioSource;
 
-    bool useSecondayGrip = false;
+    bool _useSecondayGrip = false;
     Vector3 _localPosition = Vector3.zero;
     Quaternion _localRotation = Quaternion.identity;
+
+    public bool usingSecondaryGrip { get { return _useSecondayGrip; } }
 
     private void Awake()
     {
@@ -47,7 +49,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (useSecondayGrip)
+        if (_useSecondayGrip)
         {
             transform.LookAt(secondaryGrip.position);
             //TODO - Rotate to match primary hand
@@ -102,12 +104,12 @@ public class Gun : MonoBehaviour
     public void StartSecondaryGrip(Transform gripTransform)
     {
         secondaryGrip = gripTransform;
-        useSecondayGrip = true;
+        _useSecondayGrip = true;
     }
 
     public void EndSecondaryGrip()
     {
-        useSecondayGrip = false;
+        _useSecondayGrip = false;
         transform.localPosition = _localPosition;
         transform.localRotation = _localRotation;
     }

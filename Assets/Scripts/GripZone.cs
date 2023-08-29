@@ -25,6 +25,10 @@ public class GripZone : MonoBehaviour
         if (grip != null)
         {
             if (doLogging) Debug.Log("SecondaryGrip Exit");
+
+            if (grip.isGrippingGun)
+                grip.currentGun.EndSecondaryGrip();
+
             grip.currentGun = null;
         }
     }
