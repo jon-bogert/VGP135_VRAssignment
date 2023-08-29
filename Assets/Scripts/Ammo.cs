@@ -35,9 +35,8 @@ public class Ammo : MonoBehaviour
             float percentageComplete = pickUpTime / grabTime;
             transform.position = Vector3.Lerp(transform.position, grabLocation.position, percentageComplete);
 
-            if (Mathf.Approximately(percentageComplete, 1.0f))
+            if (transform.position == grabLocation.position)
             {
-                pickingUp = false;
                 EndPickUp();
             }
         }
@@ -54,6 +53,7 @@ public class Ammo : MonoBehaviour
 
     void EndPickUp()
     {
+        pickingUp = false;
         pAmmo.AddAmmo(ammoAmount);
         Destroy(gameObject);
     }
