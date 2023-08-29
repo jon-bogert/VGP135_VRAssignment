@@ -341,7 +341,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7638672901540190024}
-  - component: {fileID: 7638672901540190029}
   m_Layer: 5
   m_Name: Default_Reticle
   m_TagString: Untagged
@@ -368,29 +367,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 360}
---- !u!114 &7638672901540190029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7638672901540190030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fea09a848fb8582488ad1a602d3a3edd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerTime: 0.1
-  returnTime: 1
-  useStraight: 1
-  straightDistance: 0.1
-  north: {fileID: 7638672900427657558}
-  east: {fileID: 5626527811949413172}
-  south: {fileID: 5626527810452207390}
-  west: {fileID: 5626527809913241944}
-  useAngled: 0
-  angledDistance: 0.1
-  northEast: {fileID: 0}
-  northWest: {fileID: 0}
-  southEast: {fileID: 0}
-  southWest: {fileID: 0}

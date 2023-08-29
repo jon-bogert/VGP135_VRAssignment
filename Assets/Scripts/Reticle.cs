@@ -35,8 +35,8 @@ public class Reticle : MonoBehaviour
 
     void Awake()
     {
-        if (gameObject.activeSelf)
-            gameObject.SetActive(false);
+        //if (gameObject.activeSelf)
+        //    gameObject.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
