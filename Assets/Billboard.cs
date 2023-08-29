@@ -7,7 +7,6 @@ public class Billboard : MonoBehaviour
     [SerializeField] Transform _cameraTransform;
 
     MeshRenderer _meshRenderer;
-    Quaternion _rotationOffset = Quaternion.identity;
 
     public bool IsEnabled
     {
