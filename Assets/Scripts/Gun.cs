@@ -10,9 +10,10 @@ public class Gun : MonoBehaviour
     [SerializeField] Transform secondaryGrip;
     [SerializeField] Transform primaryHand;
     [SerializeField] GameObject impactEffect;
-    [SerializeField] Animator muzzleFlashAnimator;
+    [SerializeField] MuzzleFlash muzzleFlash;
     [SerializeField] AudioClip shotSound;
     [SerializeField] Animator gunAnimator;
+    [SerializeField] bool _usesAmmo = true;
 
     [Header("Crosshair")]
     [SerializeField] Reticle crosshair;
@@ -81,15 +82,15 @@ public class Gun : MonoBehaviour
     {
         if (!isActiveAndEnabled)
             return;
-        if (ammo && !ammo.HasAmmo())
+        if (_usesAmmo && ammo && !ammo.HasAmmo())
             return;
 
         if (audioSource)
             audioSource.PlayOneShot(shotSound);
         if (crosshair)
             crosshair.Trigger();
-        if (muzzleFlashAnimator)
-            muzzleFlashAnimator.SetTrigger("isFiring");
+        if (muzzleFlash)
+            muzzleFlash.Dewit();
         if (gunAnimator)
             gunAnimator.SetTrigger("Shoot");
 
@@ -107,7 +108,8 @@ public class Gun : MonoBehaviour
                 Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
         }
 
-        ammo.UseAmmo();
+        if (_usesAmmo)
+            ammo.UseAmmo();
     }
 
     public void StartSecondaryGrip(Transform gripTransform)
