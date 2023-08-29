@@ -26,8 +26,6 @@ public class Billboard : MonoBehaviour
         _meshRenderer = GetComponent<MeshRenderer>();
         _meshRenderer.enabled = _display;
 
-        _rotationOffset = transform.localRotation;
-
         if (!_cameraTransform)
         {
             _cameraTransform = Camera.main.transform;
