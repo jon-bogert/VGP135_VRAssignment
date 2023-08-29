@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EnemyStates { Idle, Seek, Attacking}
+public enum EnemyStates { Idle, Seek, Attacking, Dying}
 
 public class EnemyIdle : IState<EnemyController>
 {
     public void Enter(EnemyController agent)
     {
-
+        agent.anim.Play("ZombieIdle01");
     }
 
     public void Exit(EnemyController agent)
@@ -26,12 +26,12 @@ public class EnemySeek : IState<EnemyController>
 
     public void Enter(EnemyController agent)
     {
-        agent.anim.SetBool("IsWalking", true);
+        agent.anim.Play("ZombieWalk01");
     }
 
     public void Exit(EnemyController agent)
     {
-        agent.anim.SetBool("IsWalking", false);
+
     }
 
     public void Update(EnemyController agent, float deltaTime)
@@ -47,12 +47,12 @@ public class EnemyAttacking : IState<EnemyController>
 
     public void Enter(EnemyController agent)
     {
-        agent.anim.SetBool("IsAttacking", true);
+        agent.anim.Play("ZombieAttack01");
     }
 
     public void Exit(EnemyController agent)
     {
-        agent.anim.SetBool("IsAttacking", false);
+
     }
 
     public void Update(EnemyController agent, float deltaTime)
@@ -67,6 +67,24 @@ public class EnemyAttacking : IState<EnemyController>
     }
 
     private void Attack()
+    {
+
+    }
+}
+
+public class EnemyDying : IState<EnemyController>
+{
+    public void Enter(EnemyController agent)
+    {
+
+    }
+
+    public void Exit(EnemyController agent)
+    {
+
+    }
+
+    public void Update(EnemyController agent, float deltaTime)
     {
 
     }

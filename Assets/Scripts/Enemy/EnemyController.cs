@@ -25,6 +25,8 @@ public class EnemyController : MonoBehaviour
         statesMachine = new StateMachine<EnemyController>(this);
         statesMachine.AddState<EnemyIdle>();
         statesMachine.AddState<EnemySeek>();
+        statesMachine.AddState<EnemyAttacking>();
+        statesMachine.AddState<EnemyDying>();
     }
 
     private void Start()
