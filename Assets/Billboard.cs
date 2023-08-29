@@ -30,7 +30,10 @@ public class Billboard : MonoBehaviour
         _rotationOffset = transform.localRotation;
 
         if (!_cameraTransform)
-            Debug.LogError("Billboard -> No Camera Transform Assigned");
+        {
+            _cameraTransform = Camera.main.transform;
+            if (!_cameraTransform) Debug.LogError("Billboard -> No Camera Transform Assigned of found");
+        }
     }
 
     private void Update()
