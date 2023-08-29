@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class Ammo : MonoBehaviour
 {
     [SerializeField] int ammoAmount = 10;
-    [SerializeField] float grabTime;
+    [SerializeField] float grabTime = 0.5f;
 
+    [HideInInspector]
     public PlayerAmmo pAmmo;
     Transform grabLocation;
 

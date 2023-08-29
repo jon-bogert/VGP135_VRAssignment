@@ -1,4 +1,3 @@
-using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,17 +24,23 @@ public class Gun : MonoBehaviour
     Vector3 _localPosition = Vector3.zero;
     Quaternion _localRotation = Quaternion.identity;
 
+    PlayerAmmo ammo;
+
     public bool usingSecondaryGrip { get { return _useSecondayGrip; } }
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+
         _localPosition = transform.localPosition;
         _localRotation = transform.localRotation;
     }
 
     void Start()
     {
+        ammo = FindObjectOfType<PlayerAmmo>();
+        if (!ammo) Debug.LogWarning("PlayerAmmo Object was not found");
+
         //Subscribe to Input
         shootAction.action.performed += Shoot;
     }
@@ -74,31 +79,35 @@ public class Gun : MonoBehaviour
 
     void Shoot(InputAction.CallbackContext ctx)
     {
-        if (isActiveAndEnabled)
-        {
-            if (audioSource)
-                audioSource.PlayOneShot(shotSound);
-            if (crosshair)
-                crosshair.Trigger();
-            if (muzzleFlashAnimator)
-                muzzleFlashAnimator.SetTrigger("isFiring");
-            if (gunAnimator)
-                gunAnimator.SetTrigger("Shoot");
+        if (!isActiveAndEnabled)
+            return;
+        if (ammo && !ammo.HasAmmo())
+            return;
 
-            RaycastHit hitInfo;
-            if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, range))
+        if (audioSource)
+            audioSource.PlayOneShot(shotSound);
+        if (crosshair)
+            crosshair.Trigger();
+        if (muzzleFlashAnimator)
+            muzzleFlashAnimator.SetTrigger("isFiring");
+        if (gunAnimator)
+            gunAnimator.SetTrigger("Shoot");
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, range))
+        {
+            Destructable destructable = hitInfo.transform.GetComponent<Destructable>();
+            if (destructable != null)
             {
-                Destructable destructable = hitInfo.transform.GetComponent<Destructable>();
-                if (destructable != null)
-                {
-                    destructable.Damage(damage);
-                    Debug.Log("Hit: " + hitInfo.transform.name);
-                }
-                    
-               if (impactEffect)
-                    Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                destructable.Damage(damage);
+                Debug.Log("Hit: " + hitInfo.transform.name);
             }
+
+            if (impactEffect)
+                Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
         }
+
+        ammo.UseAmmo();
     }
 
     public void StartSecondaryGrip(Transform gripTransform)
