@@ -13,25 +13,23 @@ public class Ammo : MonoBehaviour
     bool pickingUp = false;
     float pickUpTime = 0f;
 
-    Color highlightColour;
+    Color startColour;
 
     private void Start()
     {
         grabLocation = GameObject.FindGameObjectWithTag("GrabLocation").GetComponent<Transform>();
-        highlightColour = new Color(40, 40, 40);
+        startColour = GetComponent<Renderer>().material.color;
     }
 
     void Update()
     {
         if (selected)
         {
-            GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-
-            GetComponent<Renderer>().material.SetColor("_EmissionColor", highlightColour);
+            GetComponent<Renderer>().material.color = Color.white;
         }
         else
         {
-            GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+            GetComponent<Renderer>().material.color = startColour;
         }
         
         if (pickingUp)
