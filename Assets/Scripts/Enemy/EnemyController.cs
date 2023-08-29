@@ -5,36 +5,55 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("Movement"), SerializeField]
-    private NavMeshAgent enemy;
-    [SerializeField]
-    private Vector3 destination;
-    [SerializeField]
-    private Animator anim;
+    [Header("Movement")]
+    public NavMeshAgent enemy;
+    public Vector3 destination;
+    public Animator anim;
     [SerializeField]
     private float minDistance;
 
-    private void Update()
+    [Space, Header("States"), SerializeField]
+    private Enemy enemyAgent;
+    [SerializeField]
+    private StateMachine<EnemyController> statesMachine;
+    [SerializeField]
+    private EnemyStates currentState;
+
+    private void Awake()
     {
-        if((transform.position - destination).magnitude > 0.5f)
+        enemyAgent = new Enemy();
+        statesMachine = new StateMachine<EnemyController>(this);
+        statesMachine.AddState<EnemyIdle>();
+        statesMachine.AddState<EnemySeek>();
+    }
+
+    private void Start()
+    {
+        ChangeState(EnemyStates.Idle);
+    }
+
+    public void Update()
+    {
+        statesMachine.Update(Time.deltaTime);
+
+        StateManger();
+    }
+
+    private void StateManger()
+    {
+        if ((transform.position - destination).magnitude > 0.5f && currentState != EnemyStates.Seek)
         {
-            Walking();
+            ChangeState(EnemyStates.Seek);
+        }
+        else if((transform.position - destination).magnitude < 0.5f && currentState != EnemyStates.Idle)
+        {
+            ChangeState(EnemyStates.Idle);
         }
     }
 
-    private void Walking()
+    private void ChangeState(EnemyStates state)
     {
-        var distance = (transform.position - destination).magnitude;
-
-        enemy.SetDestination(destination);
-
-        if ( distance > minDistance && !anim.GetBool("IsWalking"))
-        {
-            anim.SetBool("IsWalking", true);
-        }
-        else if (distance < minDistance)
-        {
-            anim.SetBool("IsWalking", false);
-        }
+        currentState = state;
+        statesMachine.ChangeState((int)currentState);
     }
 }

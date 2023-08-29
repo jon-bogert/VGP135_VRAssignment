@@ -4,18 +4,7 @@ using UnityEngine;
 
 
 
-public class Enemy : MonoBehaviour
+public class Enemy
 {
-    public Health health;
-
-    private void Awake()
-    {
-        health = new Health(10);
-    }
-
-    private void Update()
-    {
-
-    }
-
+    public Health health = new Health(10);
 }
