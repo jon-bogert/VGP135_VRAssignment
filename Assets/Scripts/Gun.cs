@@ -94,8 +94,8 @@ public class Gun : MonoBehaviour
                     destructable.Damage(damage);
                     Debug.Log("Hit: " + hitInfo.transform.name);
                 }
-
-                if (impactEffect)
+                    
+               if (impactEffect)
                     Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
         }
