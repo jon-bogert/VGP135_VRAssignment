@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,13 +8,31 @@ public class Gun : MonoBehaviour
     [SerializeField] float range = 100f;
     [SerializeField] InputActionReference shootAction;
     [SerializeField] Transform muzzle;
+    [SerializeField] Transform secondaryGrip;
+    [SerializeField] Transform primaryHand;
     [SerializeField] GameObject impactEffect;
     [SerializeField] Animator muzzleFlashAnimator;
-    [SerializeField] PlayerAmmo pAmmo;
+    [SerializeField] AudioClip shotSound;
+    [SerializeField] Animator gunAnimator;
 
     [Header("Crosshair")]
     [SerializeField] Reticle crosshair;
     [SerializeField] float crosshairRange = 10f;
+
+    AudioSource audioSource;
+
+    bool _useSecondayGrip = false;
+    Vector3 _localPosition = Vector3.zero;
+    Quaternion _localRotation = Quaternion.identity;
+
+    public bool usingSecondaryGrip { get { return _useSecondayGrip; } }
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        _localPosition = transform.localPosition;
+        _localRotation = transform.localRotation;
+    }
 
     void Start()
     {
@@ -27,21 +46,15 @@ public class Gun : MonoBehaviour
         shootAction.action.performed -= Shoot;
     }
 
-    void OnEnable()
-    {
-        if (crosshair)
-            crosshair.gameObject.SetActive(true);
-    }
-
-    void OnDisable()
-    {
-        if (crosshair)
-            crosshair.gameObject.SetActive(false);
-    }
-
     // Update is called once per frame
     void Update()
     {
+        if (_useSecondayGrip)
+        {
+            transform.LookAt(secondaryGrip.position);
+            //TODO - Rotate to match primary hand
+        }
+
         if (!crosshair)
             return;
 
@@ -63,29 +76,41 @@ public class Gun : MonoBehaviour
     {
         if (isActiveAndEnabled)
         {
+            if (audioSource)
+                audioSource.PlayOneShot(shotSound);
             if (crosshair)
                 crosshair.Trigger();
             if (muzzleFlashAnimator)
                 muzzleFlashAnimator.SetTrigger("isFiring");
+            if (gunAnimator)
+                gunAnimator.SetTrigger("Shoot");
 
-            if (pAmmo.HasAmmo())
+            RaycastHit hitInfo;
+            if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, range))
             {
-                RaycastHit hitInfo;
-                if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, range))
+                Destructable destructable = hitInfo.transform.GetComponent<Destructable>();
+                if (destructable != null)
                 {
-                    Destructable destructable = hitInfo.transform.GetComponent<Destructable>();
-                    if (destructable != null)
-                    {
-                        destructable.Damage(damage);
-                        Debug.Log("Hit: " + hitInfo.transform.name);
-                    }
-
-                    if (impactEffect)
-                        Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                    destructable.Damage(damage);
+                    Debug.Log("Hit: " + hitInfo.transform.name);
                 }
-
-                pAmmo.UseAmmo();
+                    
+               if (impactEffect)
+                    Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             }
         }
+    }
+
+    public void StartSecondaryGrip(Transform gripTransform)
+    {
+        secondaryGrip = gripTransform;
+        _useSecondayGrip = true;
+    }
+
+    public void EndSecondaryGrip()
+    {
+        _useSecondayGrip = false;
+        transform.localPosition = _localPosition;
+        transform.localRotation = _localRotation;
     }
 }
