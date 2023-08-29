@@ -11,7 +11,7 @@ public class Health
         health = maxHealth;
     }
 
-    public float GetHealth()
+    public float Get()
     {
         return health;
     }

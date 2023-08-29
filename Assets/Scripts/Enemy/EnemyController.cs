@@ -43,11 +43,15 @@ public class EnemyController : MonoBehaviour
 
     private void StateManger()
     {
-        if ((transform.position - destination).magnitude > 0.5f && currentState != EnemyStates.Seek)
+        if(enemyAgent.health.Get() <= 0)
+        {
+            ChangeState(EnemyStates.Dying);
+        }
+        else if ((transform.position - destination).magnitude > 0.5f)
         {
             ChangeState(EnemyStates.Seek);
         }
-        else if((transform.position - destination).magnitude < 0.5f && currentState != EnemyStates.Idle)
+        else if((transform.position - destination).magnitude < 0.5f)
         {
             ChangeState(EnemyStates.Idle);
         }
@@ -55,6 +59,8 @@ public class EnemyController : MonoBehaviour
 
     private void ChangeState(EnemyStates state)
     {
+        if (currentState == state) return;
+
         currentState = state;
         statesMachine.ChangeState((int)currentState);
     }
