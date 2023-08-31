@@ -11,13 +11,14 @@ public class EnemyController : MonoBehaviour
     public Animator anim;
     [SerializeField]
     private float minDistance;
+    public Rigidbody rb;
 
-    [Space, Header("States"), SerializeField]
-    private Enemy enemyAgent;
+    [Space, Header("States")]
+    public Enemy enemyAgent;
     [SerializeField]
     private StateMachine<EnemyController> statesMachine;
     [SerializeField]
-    private EnemyStates currentState;
+    private EnemyStates currentState = EnemyStates.None;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         ChangeState(EnemyStates.Idle);
     }
 
@@ -43,21 +45,10 @@ public class EnemyController : MonoBehaviour
 
     private void StateManger()
     {
-        if(enemyAgent.health.Get() <= 0)
-        {
-            ChangeState(EnemyStates.Dying);
-        }
-        else if ((transform.position - destination).magnitude > 0.5f)
-        {
-            ChangeState(EnemyStates.Seek);
-        }
-        else if((transform.position - destination).magnitude < 0.5f)
-        {
-            ChangeState(EnemyStates.Idle);
-        }
+
     }
 
-    private void ChangeState(EnemyStates state)
+    public void ChangeState(EnemyStates state)
     {
         if (currentState == state) return;
 

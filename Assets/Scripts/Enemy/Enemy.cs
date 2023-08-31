@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-
-public class Enemy
+public class Enemy: MonoBehaviour
 {
-    public Health health = new Health(10);
+    public Health health;
+
+    public Enemy()
+    {
+        health = new Health(10);
+    }
 }
