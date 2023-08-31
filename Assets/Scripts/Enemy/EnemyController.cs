@@ -7,14 +7,13 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Movement")]
     public NavMeshAgent enemy;
-    public Vector3 destination;
+    public GameObject target;
+    public float targetSize;
     public Animator anim;
-    [SerializeField]
-    private float minDistance;
     public Rigidbody rb;
 
     [Space, Header("States")]
-    public Enemy enemyAgent;
+    public Health health;
     [SerializeField]
     private StateMachine<EnemyController> statesMachine;
     [SerializeField]
@@ -22,7 +21,6 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        enemyAgent = new Enemy();
         statesMachine = new StateMachine<EnemyController>(this);
         statesMachine.AddState<EnemyIdle>();
         statesMachine.AddState<EnemySeek>();
@@ -39,13 +37,6 @@ public class EnemyController : MonoBehaviour
     public void Update()
     {
         statesMachine.Update(Time.deltaTime);
-
-        StateManger();
-    }
-
-    private void StateManger()
-    {
-
     }
 
     public void ChangeState(EnemyStates state)
@@ -54,5 +45,11 @@ public class EnemyController : MonoBehaviour
 
         currentState = state;
         statesMachine.ChangeState((int)currentState);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + (Vector3.forward) + new Vector3(0.0f, 1.0f, 0.0f), 1);
     }
 }

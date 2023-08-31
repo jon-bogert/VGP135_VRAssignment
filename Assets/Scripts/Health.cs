@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health
+public class Health : MonoBehaviour
 {
+    [SerializeField]
     private float health;
-    
-    public Health(float maxHealth)
-    {
-        health = maxHealth;
-    }
 
     public float Get()
     {
@@ -21,4 +17,5 @@ public class Health
         health -= amt;
         return health;
     }
+
 }
