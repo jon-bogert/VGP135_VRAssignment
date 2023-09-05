@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
+  isDead: 0
 --- !u!65 &45664061
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -267,6 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
+  isDead: 0
 --- !u!65 &71070680
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -378,6 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
+  isDead: 0
 --- !u!65 &90138672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -596,6 +599,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1835019496}
     m_Modifications:
+    - target: {fileID: 416450698, guid: 13223f07e5c8fdd4283623fadee63df1, type: 3}
+      propertyPath: m_text
+      value: Wave 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4271194532059670632, guid: 13223f07e5c8fdd4283623fadee63df1,
         type: 3}
       propertyPath: m_Pivot.x
@@ -706,31 +713,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 4271194532059670635, guid: 13223f07e5c8fdd4283623fadee63df1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4271194532059670647, guid: 13223f07e5c8fdd4283623fadee63df1,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1021693777}
-    - target: {fileID: 4271194532210877340, guid: 13223f07e5c8fdd4283623fadee63df1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4271194533659891690, guid: 13223f07e5c8fdd4283623fadee63df1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4271194533693479320, guid: 13223f07e5c8fdd4283623fadee63df1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13223f07e5c8fdd4283623fadee63df1, type: 3}
 --- !u!1 &629690322
@@ -1907,6 +1894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
+  isDead: 0
 --- !u!65 &1100672571
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2794,6 +2782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
+  isDead: 0
 --- !u!65 &1760361969
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3979,6 +3968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
+  isDead: 0
 --- !u!65 &2034301064
 BoxCollider:
   m_ObjectHideFlags: 0
