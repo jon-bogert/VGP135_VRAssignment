@@ -25,6 +25,8 @@ public class EnemyController : Destructable, IPoolable
         statesMachine.AddState<EnemySeek>();
         statesMachine.AddState<EnemyAttacking>();
         statesMachine.AddState<EnemyDying>();
+
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Start()

@@ -6,11 +6,11 @@ using UnityEngine;
 [Serializable]
 public class EnemyPool : Pool<EnemyController>
 {
+    [HideInInspector]
     [SerializeField]
     private int poolSize = 50;
     [SerializeField]
     private GameObject enemyPrefab;
-    [HideInInspector]
     public int enemyAmount = 4;
     [HideInInspector]
     public int enemiesLeft;
@@ -42,7 +42,7 @@ public class EnemyPool : Pool<EnemyController>
 
     public void StartWave()
     {
-        Reset();
+        OnReset();
         for (int i = 0; i < enemyAmount; i++)
         {
             objects[i].gameObject.SetActive(true);
