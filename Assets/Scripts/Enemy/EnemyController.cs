@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     public float targetSize;
     public Animator anim;
     public Rigidbody rb;
+    public Transform hitPos;
 
     [Space, Header("States")]
     public Health health;
@@ -50,6 +51,6 @@ public class EnemyController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + (Vector3.forward) + new Vector3(0.0f, 1.0f, 0.0f), 1);
+        Gizmos.DrawWireSphere(hitPos.position, 1);
     }
 }

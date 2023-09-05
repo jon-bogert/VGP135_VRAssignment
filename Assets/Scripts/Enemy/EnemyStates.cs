@@ -108,8 +108,7 @@ public class EnemyAttacking : IState<EnemyController>
 
     private void Attack(EnemyController agent)
     {
-        pos = agent.transform.position + Vector3.forward + offset;
-        Collider[] colliders = Physics.OverlapSphere(pos, radius);
+        Collider[] colliders = Physics.OverlapSphere(agent.hitPos.position, radius);
 
         foreach (Collider collider in colliders)
         {
