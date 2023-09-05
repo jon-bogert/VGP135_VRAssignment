@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : Destructable, IPoolable
 {
     [Header("Movement")]
     public NavMeshAgent enemy;
@@ -13,8 +13,6 @@ public class EnemyController : MonoBehaviour
     public Rigidbody rb;
     public Transform hitPos;
 
-    [Space, Header("States")]
-    public Health health;
     [SerializeField]
     private StateMachine<EnemyController> statesMachine;
     [SerializeField]
@@ -52,5 +50,11 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(hitPos.position, 1);
+    }
+
+    public void Reset()
+    {
+        ResetHealth();
+        ChangeState(EnemyStates.Idle);
     }
 }

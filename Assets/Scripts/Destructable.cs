@@ -6,6 +6,8 @@ public class Destructable : MonoBehaviour
 
     float maxHealth;
 
+    public bool isDead = false;
+
     private void Awake()
     {
         maxHealth = health;
@@ -20,11 +22,12 @@ public class Destructable : MonoBehaviour
 
     void Death()
     {
-        Destroy(gameObject); // TODO - Change this to fit with Pooling
+        isDead = true;
     }
 
     public void ResetHealth()
     {
         health = maxHealth;
+        isDead = false;
     }
 }
