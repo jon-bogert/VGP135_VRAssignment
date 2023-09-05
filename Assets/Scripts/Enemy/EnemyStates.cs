@@ -123,7 +123,7 @@ public class EnemyAttacking : IState<EnemyController>
 //------------------------------------------------------------------------------------------------
 public class EnemyDying : IState<EnemyController>
 {
-    private EnemyPool pool;
+    private WaveManager manager;
     private float timer = 1.0f;
 
     public void Enter(EnemyController agent)
@@ -133,12 +133,8 @@ public class EnemyDying : IState<EnemyController>
 
     public void Exit(EnemyController agent)
     {
-        pool = GameObject.FindObjectOfType<EnemyPool>();
-        pool.enemiesLeft--;
-        if (pool.AllEnemiesDead())
-        {
-            pool.StartWave();
-        }
+        manager = GameObject.FindObjectOfType<WaveManager>();
+        manager.CheckGameOver();
         agent.gameObject.SetActive(false);
     }
 

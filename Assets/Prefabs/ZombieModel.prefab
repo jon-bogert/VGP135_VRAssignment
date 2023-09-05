@@ -1068,7 +1068,6 @@ GameObject:
   - component: {fileID: 7279704809598220607}
   - component: {fileID: 3859243670715624817}
   - component: {fileID: 2076047653971610527}
-  - component: {fileID: 7828912243833251931}
   - component: {fileID: 8386631629738194267}
   m_Layer: 0
   m_Name: ZombieModel
@@ -1156,27 +1155,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb9fa17cda63364c916b7a4924c6f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 30
+  isDead: 0
   enemy: {fileID: 8386631629738194267}
   target: {fileID: 0}
   targetSize: 2.5
   anim: {fileID: 7270036863473081824}
   rb: {fileID: 0}
   hitPos: {fileID: 5629017331695694744}
-  health: {fileID: 7828912243833251931}
   currentState: 4
---- !u!114 &7828912243833251931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4129695830519274784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c21df650e9b919a4eb432c310906ee9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 10
 --- !u!195 &8386631629738194267
 NavMeshAgent:
   m_ObjectHideFlags: 0
