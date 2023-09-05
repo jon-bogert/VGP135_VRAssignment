@@ -44,7 +44,7 @@ public class Pool<T> : MonoBehaviour where T : MonoBehaviour, IPoolable
     }
 
     //Calls IPoolable on all objects and set to 0;
-    public void Reset()
+    public void OnReset()
     {
         for (int i = 0; i < objects.Count; i++)
         {

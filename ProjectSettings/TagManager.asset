@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GrabLocation
   - Enemy
+  - Spawn
   layers:
   - Default
   - TransparentFX
