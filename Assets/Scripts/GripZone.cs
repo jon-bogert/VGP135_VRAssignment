@@ -1,5 +1,3 @@
-using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class GripZone : MonoBehaviour
