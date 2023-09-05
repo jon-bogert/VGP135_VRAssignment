@@ -10,7 +10,9 @@ public class EnemyPool : Pool<EnemyController>
     private int poolSize = 50;
     [SerializeField]
     private GameObject enemyPrefab;
-    private int enemyAmount;
+    [HideInInspector]
+    public int enemyAmount = 4;
+    [HideInInspector]
     public int enemiesLeft;
 
     private List<Transform> spawnPoints;
@@ -24,6 +26,14 @@ public class EnemyPool : Pool<EnemyController>
 
             objects.Add(enemy.GetComponent<EnemyController>());
         }
+
+        GameObject[] gObjects = GameObject.FindGameObjectsWithTag("Spawn");
+        for (int i = 0; i < gObjects.Length; i++)
+        {
+            spawnPoints.Add(gObjects[i].GetComponent<Transform>());
+        }
+
+        StartWave();
     }
 
     public EnemyPool(List<EnemyController> objects) : base(objects)
