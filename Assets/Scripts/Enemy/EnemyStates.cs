@@ -123,7 +123,9 @@ public class EnemyAttacking : IState<EnemyController>
 //------------------------------------------------------------------------------------------------
 public class EnemyDying : IState<EnemyController>
 {
+    private EnemyPool pool;
     private float timer = 1.0f;
+
     public void Enter(EnemyController agent)
     {
         agent.anim.Play("ZombieDeath01_A");
@@ -131,7 +133,13 @@ public class EnemyDying : IState<EnemyController>
 
     public void Exit(EnemyController agent)
     {
-        Object.Destroy(agent.gameObject);
+        pool = GameObject.FindObjectOfType<EnemyPool>();
+        pool.enemiesLeft--;
+        if (pool.AllEnemiesDead())
+        {
+            pool.StartWave();
+        }
+        agent.gameObject.SetActive(false);
     }
 
     public void Update(EnemyController agent, float deltaTime)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IPoolable
 {
     [Header("Movement")]
     public NavMeshAgent enemy;
@@ -52,5 +52,11 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(hitPos.position, 1);
+    }
+
+    public void Reset()
+    {
+        health.Reset();
+        ChangeState(EnemyStates.Idle);
     }
 }
