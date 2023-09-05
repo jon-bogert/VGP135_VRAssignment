@@ -4,6 +4,7 @@ public class Ammo : MonoBehaviour
 {
     [SerializeField] int ammoAmount = 10;
     [SerializeField] float grabTime = 0.5f;
+    [SerializeField] GameObject indicator;
 
     [HideInInspector]
     public PlayerAmmo pAmmo;
@@ -13,20 +14,23 @@ public class Ammo : MonoBehaviour
     bool pickingUp = false;
     float pickUpTime = 0f;
 
+    Color startColour;
+
     private void Start()
     {
         grabLocation = GameObject.FindGameObjectWithTag("GrabLocation").GetComponent<Transform>();
+        startColour = GetComponent<Renderer>().material.color;
     }
 
     void Update()
     {
         if (selected)
         {
-            GetComponent<Renderer>().material.color = Color.green;
+            indicator.SetActive(true);
         }
         else
         {
-            GetComponent<Renderer>().material.color = Color.red;
+            indicator.SetActive(false);
         }
         
         if (pickingUp)
