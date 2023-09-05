@@ -6,7 +6,6 @@ using UnityEngine;
 [Serializable]
 public class EnemyPool : Pool<EnemyController>
 {
-    [HideInInspector]
     [SerializeField]
     private int poolSize = 50;
     [SerializeField]
@@ -19,6 +18,8 @@ public class EnemyPool : Pool<EnemyController>
 
     void Start()
     {
+        objects = new List<EnemyController>();
+        spawnPoints = new List<Transform>();
         for (int i = 0; i < poolSize; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab);
