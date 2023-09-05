@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TempTarget : MonoBehaviour
 {
-    public Health health;
+    //public Health health;
 
-    private void Update()
-    {
-        if(health.Get() <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+    //private void Update()
+    //{
+    //    if(health.Get() <= 0)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

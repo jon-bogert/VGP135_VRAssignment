@@ -19,7 +19,7 @@ public class EnemyIdle : IState<EnemyController>
 
     public void Update(EnemyController agent, float deltaTime)
     {
-        if (agent.health.Get() <= 0)
+        if (agent.isDead)
         {
             agent.ChangeState(EnemyStates.Dying);
         }
@@ -47,7 +47,7 @@ public class EnemySeek : IState<EnemyController>
 
     public void Update(EnemyController agent, float deltaTime)
     {
-        if (agent.health.Get() <= 0)
+        if (agent.isDead)
         {
             agent.ChangeState(EnemyStates.Dying);
         }
@@ -84,7 +84,7 @@ public class EnemyAttacking : IState<EnemyController>
 
     public void Update(EnemyController agent, float deltaTime)
     {
-        if (agent.health.Get() <= 0)
+        if (agent.isDead)
         {
             agent.ChangeState(EnemyStates.Dying);
         }
@@ -114,7 +114,7 @@ public class EnemyAttacking : IState<EnemyController>
         {
             if (collider.CompareTag("Player"))
             {
-                collider.GetComponent<Health>().Damage(10);
+                //collider.GetComponent<Health>().Damage(10);
                 break;
             }
         }
