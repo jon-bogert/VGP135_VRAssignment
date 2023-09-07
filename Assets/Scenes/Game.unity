@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolSize: 0
   enemyPrefab: {fileID: 0}
+  enemyAmount: 0
   enemiesLeft: 0
 --- !u!4 &5385844
 Transform:
@@ -2245,7 +2246,7 @@ TerrainCollider:
   m_Material: {fileID: 0}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: 8a4a97227092f064eaf10458b8325856, type: 2}
-  m_EnableTreeColliders: 1
+  m_EnableTreeColliders: 0
 --- !u!218 &2066760974
 Terrain:
   m_ObjectHideFlags: 0
@@ -2288,7 +2289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066760972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -500, y: 0, z: -500}
+  m_LocalPosition: {x: -50, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
