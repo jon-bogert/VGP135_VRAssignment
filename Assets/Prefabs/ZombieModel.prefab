@@ -1156,6 +1156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 30
+  maxHealth: 30
   isDead: 0
   enemy: {fileID: 8386631629738194267}
   target: {fileID: 0}

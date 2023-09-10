@@ -3,18 +3,18 @@ using UnityEngine;
 public class Destructable : MonoBehaviour
 {
     [SerializeField] float health = 30f;
-
-    float maxHealth;
+    [SerializeField] float maxHealth = 30f;
 
     public bool isDead = false;
 
-    private void Awake()
+    private void Start()
     {
         maxHealth = health;
     }
 
     public void Damage(float amt)
     {
+        Debug.Log("Damage");
         health -= amt;
         if (health <= 0f)
             Death();
