@@ -54,6 +54,6 @@ public class EnemyPool : Pool<EnemyController>
 
     public bool AllEnemiesDead()
     {
-        return enemiesLeft > 0;
+        return enemiesLeft <= 0;
     }
 }
