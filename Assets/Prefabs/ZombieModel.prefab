@@ -1160,10 +1160,11 @@ MonoBehaviour:
   isDead: 0
   enemy: {fileID: 8386631629738194267}
   target: {fileID: 0}
-  targetSize: 2.5
+  stopingLength: 3
   anim: {fileID: 7270036863473081824}
   rb: {fileID: 0}
-  hitPos: {fileID: 5629017331695694744}
+  distance: 1.5
+  radius: 1.5
   currentState: 4
 --- !u!195 &8386631629738194267
 NavMeshAgent:

@@ -8,10 +8,11 @@ public class EnemyController : Destructable, IPoolable
     [Header("Movement")]
     public NavMeshAgent enemy;
     public GameObject target;
-    public float targetSize;
+    public float stopingLength;
     public Animator anim;
     public Rigidbody rb;
-    public Transform hitPos;
+    public float distance;
+    public float radius;
 
     [SerializeField]
     private StateMachine<EnemyController> statesMachine;
@@ -51,7 +52,8 @@ public class EnemyController : Destructable, IPoolable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(hitPos.position, 1);
+        var pos = transform.position + transform.forward * distance;
+        Collider[] colliders = Physics.OverlapSphere(pos, radius);
     }
 
     public void Reset()

@@ -23,7 +23,7 @@ public class EnemyIdle : IState<EnemyController>
         {
             agent.ChangeState(EnemyStates.Dying);
         }
-        else if (agent.target && (agent.transform.position - agent.target.transform.position).magnitude > agent.targetSize)
+        else if (agent.target && (agent.transform.position - agent.target.transform.position).magnitude > agent.stopingLength)
         {
             agent.ChangeState(EnemyStates.Seek);
         }
@@ -55,7 +55,7 @@ public class EnemySeek : IState<EnemyController>
         {
             agent.ChangeState(EnemyStates.Idle);
         }
-        else if((agent.transform.position - agent.target.transform.position).magnitude < agent.targetSize)
+        else if((agent.transform.position - agent.target.transform.position).magnitude < agent.stopingLength)
         {
             agent.ChangeState(EnemyStates.Attacking);
         }
@@ -68,7 +68,6 @@ public class EnemyAttacking : IState<EnemyController>
 {
     private const float attackDuration = 1.35f;
     private float attackTimer = 0.2f;
-    public float radius = 1.0f;
     public Vector3 pos;
     public Vector3 offset = new Vector3(0.0f, 1.0f, 0.0f);
 
@@ -92,7 +91,7 @@ public class EnemyAttacking : IState<EnemyController>
         {
             agent.ChangeState(EnemyStates.Idle);
         }
-        else if ((agent.transform.position - agent.target.transform.position).magnitude > agent.targetSize)
+        else if ((agent.transform.position - agent.target.transform.position).magnitude > agent.stopingLength)
         {
             agent.ChangeState(EnemyStates.Seek);
         }
@@ -108,7 +107,8 @@ public class EnemyAttacking : IState<EnemyController>
 
     private void Attack(EnemyController agent)
     {
-        Collider[] colliders = Physics.OverlapSphere(agent.hitPos.position, radius);
+        var pos = agent.transform.position + offset + agent.transform.forward * agent.distance;
+        Collider[] colliders = Physics.OverlapSphere(pos, agent.radius);
 
         foreach (Collider collider in colliders)
         {

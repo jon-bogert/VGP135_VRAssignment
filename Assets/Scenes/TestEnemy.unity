@@ -723,6 +723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 0}
+  textLabel: 'Wave: '
   enemyIncrease: 3
 --- !u!4 &1798153935
 Transform:
