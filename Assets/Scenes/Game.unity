@@ -2250,6 +2250,11 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4170838444052078924, guid: 5a31c9b282cfc5e4ca5af5db87868962,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4170838444287711727, guid: 5a31c9b282cfc5e4ca5af5db87868962,
         type: 3}
       propertyPath: m_Name
