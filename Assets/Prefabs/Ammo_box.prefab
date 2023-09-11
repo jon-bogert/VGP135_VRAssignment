@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23075233644699614}
   - component: {fileID: 5790341212737143771}
   - component: {fileID: 4423043118925153876}
+  - component: {fileID: 8159168036022830255}
   m_Layer: 0
   m_Name: Ammo_box
   m_TagString: Untagged
@@ -116,6 +117,22 @@ MonoBehaviour:
   indicator: {fileID: 7409044099694401073}
   pAmmo: {fileID: 0}
   selected: 0
+--- !u!54 &8159168036022830255
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728619453497436}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &5756788360182975070
 PrefabInstance:
   m_ObjectHideFlags: 0
