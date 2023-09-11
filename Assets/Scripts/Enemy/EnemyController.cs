@@ -14,11 +14,16 @@ public class EnemyController : Destructable, IPoolable
     public Rigidbody rb;
     public float distance;
     public float radius;
+    public uint scoreAmount = 100;
+    public int damageAmount = 10;
 
     [SerializeField]
     private StateMachine<EnemyController> statesMachine;
     [SerializeField]
     private EnemyStates currentState = EnemyStates.None;
+
+    public GameManager gameManager;
+    public AudioSource audioSource;
 
     private void Awake()
     {
@@ -29,10 +34,12 @@ public class EnemyController : Destructable, IPoolable
         statesMachine.AddState<EnemyDying>();
 
         target = GameObject.FindGameObjectWithTag("Player");
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
+        gameManager = GameManager.instance;
         rb = GetComponent<Rigidbody>();
         ChangeState(EnemyStates.Idle);
     }

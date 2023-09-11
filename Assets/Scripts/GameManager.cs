@@ -5,6 +5,8 @@ public delegate void ScoreEvent(ulong score);
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     ulong score = 0;
     ulong highScore = 0;
 
@@ -15,11 +17,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (FindObjectsOfType<GameManager>().Length > 1)
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
         }
+
+        instance = this;
         DontDestroyOnLoad(gameObject);
         Application.targetFrameRate = 120;
     }
@@ -35,7 +39,6 @@ public class GameManager : MonoBehaviour
         if (score > highScore)
             highScore = score;
 
-        score = 0;
         LoadGameOver();
     }
 
@@ -52,5 +55,10 @@ public class GameManager : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene("Game");
+    }
+
+    public void ScoreReset()
+    {
+        score = 0;
     }
 }

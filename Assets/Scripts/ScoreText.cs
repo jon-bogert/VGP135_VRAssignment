@@ -15,7 +15,7 @@ public class ScoreText : MonoBehaviour
 
     private void Start()
     {
-        gameManager  = FindObjectOfType<GameManager>();
+        gameManager  = GameManager.instance;
         if (!gameManager)
             Debug.LogError("ScoreText->Could not find GameManager in Scene");
 

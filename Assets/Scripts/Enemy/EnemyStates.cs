@@ -116,7 +116,8 @@ public class EnemyAttacking : IState<EnemyController>
         {
             if (collider.CompareTag("Player"))
             {
-                //collider.GetComponent<Health>().Damage(10);
+                agent.audioSource.Play();
+                collider.GetComponentInChildren<PlayerHealth>().Damage(agent.damageAmount);
                 break;
             }
         }
@@ -130,6 +131,7 @@ public class EnemyDying : IState<EnemyController>
 
     public void Enter(EnemyController agent)
     {
+        agent.gameManager.AddToScore(agent.scoreAmount);
         agent.anim.Play("ZombieDeath01_A");
     }
 

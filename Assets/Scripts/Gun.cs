@@ -14,6 +14,8 @@ public class Gun : MonoBehaviour
     [SerializeField] AudioClip shotSound;
     [SerializeField] Animator gunAnimator;
     [SerializeField] bool _usesAmmo = true;
+    [SerializeField] bool _useFireLimit = false;
+    [SerializeField] float _fireLimitTime = 0.2f;
     [SerializeField] LayerMask raycastLayerMask;
 
     [Header("Crosshair")]
@@ -25,6 +27,7 @@ public class Gun : MonoBehaviour
     bool _useSecondayGrip = false;
     Vector3 _localPosition = Vector3.zero;
     Quaternion _localRotation = Quaternion.identity;
+    float _fireTimer = 0f;
 
     PlayerAmmo ammo;
 
@@ -45,6 +48,7 @@ public class Gun : MonoBehaviour
 
         //Subscribe to Input
         shootAction.action.performed += Shoot;
+        _fireTimer = _fireLimitTime;
     }
 
     void OnDestroy()
@@ -77,6 +81,9 @@ public class Gun : MonoBehaviour
 
         crosshair.transform.position = new Vector3(chPos.x, chPos.y, chPos.z);
         crosshair.transform.LookAt(muzzle);
+
+        if (_useFireLimit)
+            _fireTimer += Time.deltaTime;
     }
 
     void Shoot(InputAction.CallbackContext ctx)
@@ -85,6 +92,11 @@ public class Gun : MonoBehaviour
             return;
         if (_usesAmmo && ammo && !ammo.HasAmmo())
             return;
+
+        if (_useFireLimit && _fireTimer < _fireLimitTime)
+            return;
+        else if (_useFireLimit)
+            _fireTimer = 0f;
 
         if (audioSource)
             audioSource.PlayOneShot(shotSound);

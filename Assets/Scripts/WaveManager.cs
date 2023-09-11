@@ -17,8 +17,11 @@ public class WaveManager : MonoBehaviour
 
     private static System.Random rnd = new System.Random();
 
+    PlayerHealth playerHealth;
+
     void Start()
     {
+        playerHealth = FindObjectOfType<PlayerHealth>();
         enemyPool = GameObject.FindObjectOfType<EnemyPool>();
         //enemyPool.StartWave();
         UpdateWaveText();
@@ -32,6 +35,7 @@ public class WaveManager : MonoBehaviour
             enemyPool.enemyAmount += enemyIncrease;
             waveCount++;
             enemyPool.StartWave();
+            playerHealth.Heal();
             UpdateWaveText();
         }
     }
