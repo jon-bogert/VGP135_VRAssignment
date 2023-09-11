@@ -53,7 +53,7 @@ public class EnemyController : Destructable, IPoolable
     {
         Gizmos.color = Color.red;
         var pos = transform.position + transform.forward * distance;
-        Collider[] colliders = Physics.OverlapSphere(pos, radius);
+        Gizmos.DrawWireSphere(pos + new Vector3(0.0f, 1.0f, 0.0f), radius);
     }
 
     public void Reset()
