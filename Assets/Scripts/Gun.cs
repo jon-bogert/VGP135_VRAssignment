@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour
     [SerializeField] AudioClip shotSound;
     [SerializeField] Animator gunAnimator;
     [SerializeField] bool _usesAmmo = true;
+    [SerializeField] LayerMask raycastLayerMask;
 
     [Header("Crosshair")]
     [SerializeField] Reticle crosshair;
@@ -66,7 +67,7 @@ public class Gun : MonoBehaviour
 
         //Updating Crosshair if not null
         Vector3 chPos;
-        if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, crosshairRange))
+        if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, crosshairRange, raycastLayerMask))
             chPos = hitInfo.point;
         else
         {
@@ -95,7 +96,7 @@ public class Gun : MonoBehaviour
             gunAnimator.SetTrigger("Shoot");
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, range))
+        if (Physics.Raycast(muzzle.position, muzzle.forward, out hitInfo, range, raycastLayerMask))
         {
             Destructable destructable = hitInfo.transform.GetComponent<Destructable>();
             if (destructable != null)

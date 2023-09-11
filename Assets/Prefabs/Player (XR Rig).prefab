@@ -2675,6 +2675,9 @@ MonoBehaviour:
   shotSound: {fileID: 8300000, guid: fe0f60de4116f784ead7d7b905294aa6, type: 3}
   gunAnimator: {fileID: 4170838445547427088}
   _usesAmmo: 0
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 55
   crosshair: {fileID: 4170838445325049452}
   crosshairRange: 10
 --- !u!82 &4170838445898060350
@@ -2916,6 +2919,11 @@ PrefabInstance:
       propertyPath: primaryHand
       value: 
       objectReference: {fileID: 4170838445344274805}
+    - target: {fileID: 1066330905565782162, guid: e518839826e0e9d45b2ba75901af40fb,
+        type: 3}
+      propertyPath: raycastLayerMask.m_Bits
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 1066330905565782191, guid: e518839826e0e9d45b2ba75901af40fb,
         type: 3}
       propertyPath: m_Name
@@ -3091,6 +3099,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332985359668101450, guid: 13223f07e5c8fdd4283623fadee63df1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6726097229853158249, guid: 13223f07e5c8fdd4283623fadee63df1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13223f07e5c8fdd4283623fadee63df1, type: 3}
