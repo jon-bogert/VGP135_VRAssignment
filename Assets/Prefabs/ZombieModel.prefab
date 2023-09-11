@@ -1139,7 +1139,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -1158,6 +1158,7 @@ MonoBehaviour:
   health: 30
   maxHealth: 30
   isDead: 0
+  moveSpeed: 1
   enemy: {fileID: 8386631629738194267}
   target: {fileID: 0}
   stopingLength: 3

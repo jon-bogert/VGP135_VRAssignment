@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyController : Destructable, IPoolable
 {
     [Header("Movement")]
+    public float moveSpeed = 2f;
     public NavMeshAgent enemy;
     public GameObject target;
     public float stopingLength;

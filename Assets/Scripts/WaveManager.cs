@@ -13,7 +13,7 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         enemyPool = GameObject.FindObjectOfType<EnemyPool>();
-        enemyPool.StartWave();
+        //enemyPool.StartWave();
         UpdateWaveText();
     }
 

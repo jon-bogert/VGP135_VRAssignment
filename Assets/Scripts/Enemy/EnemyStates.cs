@@ -35,7 +35,7 @@ public class EnemySeek : IState<EnemyController>
 {
     public void Enter(EnemyController agent)
     {
-        agent.enemy.speed = 3.5f;
+        agent.enemy.speed = agent.moveSpeed;
         agent.anim.Play("ZombieWalk01");
     }
 
@@ -139,13 +139,13 @@ public class EnemyDying : IState<EnemyController>
     {
         manager = GameObject.FindObjectOfType<WaveManager>();
         manager.CheckGameOver();
-        agent.ChangeState(EnemyStates.Idle);
         agent.gameObject.SetActive(false);
     }
 
     public void Update(EnemyController agent, float deltaTime)
     {
         timer -= deltaTime;
-        if (timer <= 0.0f) Exit(agent);
+        if (timer <= 0.0f)
+            agent.ChangeState(EnemyStates.Idle);
     }
 }

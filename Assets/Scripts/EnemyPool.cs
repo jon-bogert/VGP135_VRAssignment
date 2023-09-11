@@ -1,7 +1,8 @@
- using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XephTools;
 
 [Serializable]
 public class EnemyPool : Pool<EnemyController>
@@ -43,11 +44,17 @@ public class EnemyPool : Pool<EnemyController>
 
     public void StartWave()
     {
-        OnReset();
+        Debug.Log("<color=green>Start Wave");
+        Debug.Log("Enemy Amount: " + enemyAmount);
+        Debug.Log("Enemies Left Amount: " + enemiesLeft);
+        //OnReset();
         for (int i = 0; i < enemyAmount; i++)
         {
-            objects[i].gameObject.SetActive(true);
-            objects[i].transform.position = spawnPoints[i % spawnPoints.Count].position;
+            EnemyController next = GetNext();
+            next.gameObject.SetActive(true);
+            next.transform.position = spawnPoints[i % spawnPoints.Count].position;
+            //objects[i].gameObject.SetActive(true);
+            //objects[i].transform.position = spawnPoints[i % spawnPoints.Count].position;
         }
         enemiesLeft = enemyAmount;
     }
@@ -55,5 +62,11 @@ public class EnemyPool : Pool<EnemyController>
     public bool AllEnemiesDead()
     {
         return enemiesLeft <= 0;
+    }
+
+    private void Update()
+    {
+        VRDebug.Monitor(2, "Amt  " + enemyAmount.ToString());
+        VRDebug.Monitor(1, "Left " + enemiesLeft.ToString());
     }
 }
