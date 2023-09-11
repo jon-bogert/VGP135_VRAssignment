@@ -42,6 +42,7 @@ public class EnemySeek : IState<EnemyController>
     public void Exit(EnemyController agent)
     {
         agent.enemy.speed = 0.0f;
+        agent.enemy.angularSpeed = 0.0f;
         agent.rb.velocity = Vector3.zero;
     }
 
@@ -83,6 +84,9 @@ public class EnemyAttacking : IState<EnemyController>
 
     public void Update(EnemyController agent, float deltaTime)
     {
+        agent.enemy.speed = 0.0f;
+        agent.enemy.angularSpeed = 0.0f;
+
         if (agent.isDead)
         {
             agent.ChangeState(EnemyStates.Dying);
