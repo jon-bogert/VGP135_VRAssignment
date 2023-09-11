@@ -139,6 +139,7 @@ public class EnemyDying : IState<EnemyController>
     {
         manager = GameObject.FindObjectOfType<WaveManager>();
         manager.CheckGameOver();
+        agent.ChangeState(EnemyStates.Idle);
         agent.gameObject.SetActive(false);
     }
 
