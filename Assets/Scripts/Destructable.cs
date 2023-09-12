@@ -1,9 +1,12 @@
 using UnityEngine;
-
+public delegate void DeathEvent();
 public class Destructable : MonoBehaviour
 {
     [SerializeField] float health = 30f;
     [SerializeField] float maxHealth = 30f;
+
+    public DeathEvent hasDied;
+
 
     public bool isDead = false;
 
@@ -22,6 +25,7 @@ public class Destructable : MonoBehaviour
 
     void Death()
     {
+        hasDied?.Invoke();
         isDead = true;
     }
 
